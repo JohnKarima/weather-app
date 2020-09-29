@@ -1,0 +1,22 @@
+{% extends 'base.html'%}
+{% import 'macros.html' as macro%}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% if title %}
+        <title> {{ title }}</title>
+        {% else %}
+        <title> Home: WeatherApp </title>
+        {% endif %}
+    </head>
+    <body>
+
+        <h1>Weather App Project- Home Page</h1>
+    </body>
+</html>
+
+{% endblock%}
