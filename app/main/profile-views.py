@@ -2,9 +2,7 @@ from flask import render_template,request,redirect,url_for,abort
 from . import main
 from flask_login import login_required
 from ..models import Reviews, User
-
 from .. import db,photos
-
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -14,7 +12,6 @@ def profile(uname):
         abort(404)
 
     return render_template("profile/profile.html", user = user)
-
 
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
