@@ -5,7 +5,6 @@ from ..models import User
 from .forms import LoginForm, RegistrationForm
 from .. import db
 
-
 @auth.route('/login',methods=['GET','POST'])
 def login():
     login_form = LoginForm()
@@ -19,8 +18,6 @@ def login():
 
     title = "Login: WeatherApp"
     return render_template('auth/login.html',login_form = login_form,title=title)
-
-
 
 
 @auth.route('/register',methods = ["GET","POST"])
