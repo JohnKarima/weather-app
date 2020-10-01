@@ -4,9 +4,6 @@ OverWatch.com
 # Project Description 
 - A weather web application that allows users to add cities to the dashboard and view summarized climatic conditions of the selected cities at a glance.
 
-# Link to Live Project
-- https://overwatch343.herokuapp.com
-
 # Authors
 - [Priscilla Avishinga](https://github.com/priscillapepe)
 - [Brenda Muthoni](https://github.com/Muthoni2000)
