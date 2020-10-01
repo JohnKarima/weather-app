@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from config import config_options
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-
+import cloudinary
 
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
@@ -36,6 +36,7 @@ def create_app(config_name):
     app.register_blueprint(auth_blueprint,url_prefix = '/authenticate')
 
     # setting config
-
+    # from .request import configure_request
+    # configure_request(app)
 
     return app

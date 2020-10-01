@@ -3,20 +3,68 @@
 
 {% block content %}
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        {% if title %}
-        <title> {{ title }}</title>
-        {% else %}
-        <title> Home: WeatherApp </title>
-        {% endif %}
-    </head>
-    <body>
+<meta charset="utf-8">
+{% if title %}
+<title> {{ title }}</title>
+{% else %}
+<title> Home: WeatherApp </title>
+{% endif %}
 
-        <h1>Weather App Project- Home Page</h1>
-    </body>
-</html>
+<h1>Weather App Project- Home Page</h1>
+
+<div class="container">
+    <form method="POST">
+        <div class="field has-addons">
+            <div class="control is-expanded">
+                <input class="input" name="city" type="text" placeholder="City Name">
+            </div>
+            <div class="control">
+                <button class="button is-info">Add City</button>
+            </div>
+        </div>
+    </form>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            {% set message_class = 'is-success' %}
+            {% if category == 'error' %}
+                {% set message_class = 'is-danger' %}
+            {% endif %}
+            <div class="notification {{ message_class }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+</div>
+
+
+{% for weather in weather_data [::-1] %}
+
+    <div class="container">
+    <div class="col-lg-10">
+
+    <div class="card weather-card">
+        <div class="card-body pb-1">
+        <h4 class="card-title font-weight-bold" >{{weather.city|capitalize}}</h4>
+        <p>Thursday</p>
+        <p class="card-text">{{weather.description|capitalize}}</p>
+        <img src="http://openweathermap.org/img/w/{{weather.icon}}.png" alt="image">
+        <div class="d-flex justify-content-between">
+            <p class="display-1 degree">{{weather.temperature}}°C</p>
+            <i class="fas fa-sun-o fa-5x pt-3 amber-text"></i>
+        </div>
+        <div class="d-flex justify-content-between mb-4">
+            <p><i class="fas fa-tint fa-lg text-info pr-2"></i>{{weather.humidity}}% Humidity</p>
+            <p><i class="fas fa-leaf fa-lg grey-text pr-2"></i>{{weather.wind}} km/h Winds</p>
+        </div>
+            <a href="{{ url_for('main.delete_city', name=weather.city) }}">
+                <button class="delete">Delete</button> <hr>
+            </a>
+            </div>
+        </div>
+        </div>
+        <br>
+    </div>
+{% endfor %}
 
 {% endblock%}
