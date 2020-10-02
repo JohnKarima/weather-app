@@ -1,4 +1,4 @@
-from flask import render_template,request,redirect,url_for,abort
+from flask import render_template,request,redirect,url_for,abort, flash
 from . import main
 from flask_login import login_required, current_user
 from ..models import User, City
@@ -9,8 +9,6 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import requests
-
-
 
 
 @main.route('/')
@@ -31,7 +29,7 @@ def index():
         
         weather_data.append(weather)
 
-    title = 'Home: WeatherApp'
+    title = 'Home: OverWatch'
     return render_template('index.html', title = title, weather_data = weather_data)
 
 @main.route('/', methods=['POST'])
@@ -68,7 +66,6 @@ def delete_city(name):
 
     flash(f'Successfully deleted { city.name }', 'success')
     return redirect(url_for('main.index'))
-    return render_template('index.html', title = title)
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -78,7 +75,6 @@ def profile(uname):
         abort(404)
 
     return render_template("profile/profile.html", user = user)
-
 
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
 @login_required
@@ -91,7 +87,6 @@ def update_pic(uname):
         user.profile_pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
-
 
 @main.route('/user/<uname>/update', methods=['GET', 'POST'])
 @login_required

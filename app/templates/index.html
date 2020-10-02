@@ -3,20 +3,46 @@
 
 {% block content %}
 
-
 <style>
-  
-</style>
+    h1{
+        font-size: 400%;
+        font-weight: bold;
+        text-decoration: underline;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    h2{
+        font-size: 350%;
+        font-style: italic;
+    }
+    h4{
+        font-size: 200%;
+    }
 
+    .card-texter{
+        font-size: 150%;
+    }
+    .card-texter2{
+        font-size: 110%;
+        color: gray;
+    }
+    .is-success{
+        background-color: rgba(9, 255, 0, 0.473);
+    }
+    .is-danger{
+        background-color: rgba(226, 39, 39, 0.473);
+    }
+</style>
 
 <meta charset="utf-8">
 {% if title %}
 <title> {{ title }}</title>
 {% else %}
-<title> Home: WeatherApp </title>
+<title> Home: OverWatch </title>
 {% endif %}
+<div style="background-image:linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url(../static/img/background.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; background-attachment: fixed; height:100%;"><br><br>
 
-<h1>Weather App Project- Home Page</h1>
+<h1 class="text-center">OverWatch</h1>
+<h2 class="text-center">Global Weather, On-Demand </h2>
 
 <div class="container">
     <form class="form-inline md-form mr-auto mb-4" method="POST">
@@ -25,7 +51,7 @@
                 <input class="input" name="city" type="text" placeholder="City Name">
             </div>
             <div class="control"><br>
-                <button class="btn aqua-gradient btn-rounded btn-sm my-0">Add City</button>
+                <button class="btn aqua-gradient btn-rounded btn-sm my-0"><b>Add City Weather</b></button>
             </div>
         </div>
     </form>
@@ -42,38 +68,34 @@
     {% endif %}
 {% endwith %}
 </div>
-
 <div class="container text-center">
     <div class="row">
 
 {% for weather in weather_data [::-1] %}
 
-    
-    <div class="col-md-4 mt-1">
+    <div class="col-md-4 mt-1 mb-4">
 
-    <div class="card weather-card">
-        <div class="card-body pb-1">
-        <h4 class="card-title font-weight-bold" >{{weather.city|capitalize}}</h4>
-        <p>Thursday</p>
-        <p class="card-text">{{weather.description|capitalize}}</p>
-        <img class="img" src="http://openweathermap.org/img/w/{{weather.icon}}.png" alt="image">
-        <div class="text-center">
-            <p class="display-1 degree">{{weather.temperature}}<h3>°C</h3></p> 
-        </div>
-        <div class="d-flex justify-content-between mb-4">
-            <p><i class="fas fa-tint fa-lg text-info pr-2"></i>{{weather.humidity}}% Humidity</p>
-            <p><i class="fas fa-leaf fa-lg grey-text pr-2"></i>{{weather.wind}} km/h Winds</p>
-        </div>
-            <a href="{{ url_for('main.delete_city', name=weather.city) }}">
-                <button class="delete btn peach-gradient">Delete</button> <hr>
-            </a>
+        <div class="card weather-card" style="background-color: rgb(255, 255, 255, 0.75);">
+            <div class="card-body pb-1">
+            <h4 class="card-title font-weight-bold" >{{weather.city}}</h4>
+            <p class="card-texter">Friday</p>
+            <p class="card-texter2">{{weather.description|capitalize}}</p>
+            <img class="img" src="http://openweathermap.org/img/w/{{weather.icon}}.png" alt="image">
+            <div class="text-center">
+                <p class="display-1 degree">{{weather.temperature}}<h3>°C</h3></p> <br>
             </div>
+            <div class="d-flex justify-content-between mb-4">
+                <p><i class="fas fa-tint fa-lg text-info pr-2"></i>{{weather.humidity}}% Humidity</p>
+                <p><i class="fas fa-leaf fa-lg grey-text pr-2"></i>{{weather.wind}} km/h Winds</p>
+            </div>
+                <a href="{{ url_for('main.delete_city', name=weather.city) }}">
+                    <button class="delete btn peach-gradient">Delete</button> <hr>
+                </a>
+                </div>
+            </div>
+        </div><br>
+{% endfor %}
         </div>
     </div>
-
-        <br>
-{% endfor %}
 </div>
-</div>
-
 {% endblock%}
