@@ -5,7 +5,6 @@ from ..models import User
 from .forms import LoginForm, RegistrationForm
 from .. import db
 
-
 @auth.route('/login',methods=['GET','POST'])
 def login():
     login_form = LoginForm()
@@ -17,11 +16,8 @@ def login():
 
         flash('Invalid username or Password')
 
-    title = "Login: WeatherApp"
+    title = "Login: OverWatch"
     return render_template('auth/login.html',login_form = login_form,title=title)
-
-
-
 
 @auth.route('/register',methods = ["GET","POST"])
 def register():
@@ -33,7 +29,6 @@ def register():
         return redirect(url_for('auth.login'))
         title = "New Account"
     return render_template('auth/register.html',registration_form = form)
-
 
 @auth.route('/logout')
 @login_required
